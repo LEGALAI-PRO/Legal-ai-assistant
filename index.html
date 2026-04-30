@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Legal Document Analyzer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-one"></div>
+    <div class="bg-orb orb-two"></div>
+    <div class="app-shell">
+      <header class="hero">
+        <div class="hero-top">
+          <div class="brand">
+            <span class="brand-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img">
+                <path
+                  d="M12 3a1 1 0 0 1 1 1v1h4a1 1 0 1 1 0 2h-2.44l2.34 4.67c.33.66.2 1.46-.34 1.98a4.2 4.2 0 0 1-5.93 0c-.54-.52-.67-1.32-.34-1.98L12.67 7h-1.34l2.34 4.67c.33.66.2 1.46-.34 1.98a4.2 4.2 0 0 1-5.93 0c-.54-.52-.67-1.32-.34-1.98L9.4 7H7a1 1 0 1 1 0-2h4V4a1 1 0 0 1 1-1Zm-2.76 9h2.52L10.5 9.48 9.24 12Zm7 0h2.52L17.5 9.48 16.24 12ZM11 16h2v3h2a1 1 0 1 1 0 2H9a1 1 0 1 1 0-2h2v-3Z"
+                ></path>
+              </svg>
+            </span>
+            <h1>LexAI</h1>
+          </div>
+        </div>
+        <p>
+          Premium AI contract intelligence for freelancers, businesses, legal teams,
+          healthcare, real estate, tech, and every major industry.
+        </p>
+      </header>
+
+      <main class="card">
+        <section class="config-section">
+          <label for="apiKey">Groq API Key</label>
+          <input
+            id="apiKey"
+            type="password"
+            placeholder="gsk_..."
+            autocomplete="off"
+          />
+          <small class="hint">
+            Your key is only used in your browser for this session.
+          </small>
+        </section>
+
+        <section class="input-section">
+          <label for="professionInput">Industry / Profession</label>
+          <input
+            id="professionInput"
+            type="text"
+            list="professionOptions"
+            placeholder="Search profession (e.g., SaaS companies, Lawyers, Landlords...)"
+          />
+          <datalist id="professionOptions">
+            <option value="Freelancers & Creative - Freelancers"></option>
+            <option value="Freelancers & Creative - Designers"></option>
+            <option value="Freelancers & Creative - Writers"></option>
+            <option value="Freelancers & Creative - Photographers"></option>
+            <option value="Freelancers & Creative - Video editors"></option>
+            <option value="Freelancers & Creative - Musicians"></option>
+            <option value="Business & Entrepreneurs - Startups"></option>
+            <option value="Business & Entrepreneurs - Small businesses"></option>
+            <option value="Business & Entrepreneurs - Large corporations"></option>
+            <option value="Business & Entrepreneurs - Entrepreneurs"></option>
+            <option value="Business & Entrepreneurs - Investors"></option>
+            <option value="Business & Entrepreneurs - Venture capitalists"></option>
+            <option value="Legal & Finance - Lawyers"></option>
+            <option value="Legal & Finance - Accountants"></option>
+            <option value="Legal & Finance - Financial advisors"></option>
+            <option value="Legal & Finance - Insurance agents"></option>
+            <option value="Legal & Finance - Banks"></option>
+            <option value="Real Estate - Landlords"></option>
+            <option value="Real Estate - Tenants"></option>
+            <option value="Real Estate - Real estate agents"></option>
+            <option value="Real Estate - Property investors"></option>
+            <option value="Real Estate - Mortgage brokers"></option>
+            <option value="Technology - SaaS companies"></option>
+            <option value="Technology - Software developers"></option>
+            <option value="Technology - App developers"></option>
+            <option value="Technology - IT consultants"></option>
+            <option value="Technology - Cybersecurity firms"></option>
+            <option value="Healthcare - Doctors"></option>
+            <option value="Healthcare - Hospitals"></option>
+            <option value="Healthcare - Pharmacies"></option>
+            <option value="Healthcare - Medical device companies"></option>
+            <option value="Healthcare - Healthcare startups"></option>
+            <option value="Trade & Commerce - Importers"></option>
+            <option value="Trade & Commerce - Exporters"></option>
+            <option value="Trade & Commerce - Traders"></option>
+            <option value="Trade & Commerce - Wholesalers"></option>
+            <option value="Trade & Commerce - Retailers"></option>
+            <option value="Trade & Commerce - E-commerce businesses"></option>
+            <option value="Education - Schools"></option>
+            <option value="Education - Universities"></option>
+            <option value="Education - Online course creators"></option>
+            <option value="Education - Tutors"></option>
+            <option value="Education - EdTech companies"></option>
+            <option value="Media & Entertainment - YouTubers"></option>
+            <option value="Media & Entertainment - Influencers"></option>
+            <option value="Media & Entertainment - Actors"></option>
+            <option value="Media & Entertainment - Production companies"></option>
+            <option value="Media & Entertainment - Music labels"></option>
+            <option value="Construction & Engineering - Contractors"></option>
+            <option value="Construction & Engineering - Architects"></option>
+            <option value="Construction & Engineering - Engineers"></option>
+            <option value="Construction & Engineering - Construction companies"></option>
+            <option value="Hospitality & Food - Restaurants"></option>
+            <option value="Hospitality & Food - Hotels"></option>
+            <option value="Hospitality & Food - Catering companies"></option>
+            <option value="Hospitality & Food - Food suppliers"></option>
+            <option value="Agriculture - Farmers"></option>
+            <option value="Agriculture - Agricultural businesses"></option>
+            <option value="Agriculture - Food processing companies"></option>
+            <option value="Manufacturing - Factories"></option>
+            <option value="Manufacturing - Suppliers"></option>
+            <option value="Manufacturing - Distributors"></option>
+            <option value="Manufacturing - Logistics companies"></option>
+            <option value="Nonprofit & Government - NGOs"></option>
+            <option value="Nonprofit & Government - Charities"></option>
+            <option value="Nonprofit & Government - Government contractors"></option>
+          </datalist>
+          <small class="hint">
+            Search and select your profession to activate specialized clause checks.
+          </small>
+
+          <label for="contractText">Contract Text</label>
+          <textarea
+            id="contractText"
+            rows="14"
+            placeholder="Paste your contract text here..."
+          ></textarea>
+
+          <div class="input-actions">
+            <label for="fileUpload" class="file-button">Upload .txt File</label>
+            <input id="fileUpload" type="file" accept=".txt,text/plain" />
+            <button id="analyzeBtn" type="button">Analyze Document</button>
+          </div>
+          <p id="status" class="status"></p>
+        </section>
+
+        <section class="results-section hidden" id="resultsSection">
+          <h2>Analysis Results</h2>
+          <div class="risk-score-panel">
+            <span id="analysisContext">Risk Score</span>
+            <strong id="riskScoreValue">0%</strong>
+          </div>
+          <div class="result-grid">
+            <article class="result-card risk">
+              <h3>Risky Clauses</h3>
+              <ul id="riskyList"></ul>
+            </article>
+            <article class="result-card safe">
+              <h3>Safe Clauses</h3>
+              <ul id="safeList"></ul>
+            </article>
+            <article class="result-card missing">
+              <h3>Missing Important Terms</h3>
+              <ul id="missingList"></ul>
+            </article>
+          </div>
+          <div class="overall-summary">
+            <h3>Overall Summary</h3>
+            <p id="overallSummary"></p>
+          </div>
+          <div class="report-actions">
+            <button id="downloadPdfBtn" type="button">Download PDF Report</button>
+          </div>
+        </section>
+      </main>
+    </div>
+    <button
+      id="themeToggle"
+      type="button"
+      class="ghost-button theme-fab"
+      aria-label="Toggle dark and light mode"
+      title="Toggle theme"
+    >
+      <span class="theme-icon" aria-hidden="true">🌙</span>
+      <span class="theme-label">Dark</span>
+    </button>
+
+    <script src="config.local.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
