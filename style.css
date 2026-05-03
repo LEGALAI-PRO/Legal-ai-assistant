@@ -171,7 +171,6 @@ textarea:focus {
   color: var(--muted);
 }
 
-.config-section,
 .input-section,
 .results-section {
   background: color-mix(in oklab, var(--surface) 72%, transparent);

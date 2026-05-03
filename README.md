@@ -16,10 +16,21 @@ A simple web app built with HTML, CSS, and JavaScript that analyzes contract tex
 
 ## How to Run
 
-1. Open `index.html` in your browser.
-2. Enter your Groq API key.
-3. Paste contract text or upload a `.txt` file.
-4. Click **Analyze Document**.
+### Deployed (recommended)
+
+Deploy to [Vercel](https://vercel.com). In the project settings, add an environment variable **`GROQ_API_KEY`** with your Groq API key. The browser calls the serverless route `api/analyze.js`, which attaches the key—users never see or enter it.
+
+### Local development
+
+Use [Vercel CLI](https://vercel.com/docs/cli) so `/api/analyze` is served:
+
+```bash
+vercel dev
+```
+
+Set `GROQ_API_KEY` in `.env.local` (see Vercel CLI env docs) or in your shell before `vercel dev`.
+
+Opening `index.html` directly from disk will not resolve `/api/analyze`; use `vercel dev` or a deployed URL.
 
 ## Notes
 

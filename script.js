@@ -1,4 +1,3 @@
-const apiKeyInput = document.getElementById("apiKey");
 const contractText = document.getElementById("contractText");
 const professionInput = document.getElementById("professionInput");
 const fileUpload = document.getElementById("fileUpload");
@@ -16,9 +15,8 @@ const overallSummary = document.getElementById("overallSummary");
 const riskScoreValue = document.getElementById("riskScoreValue");
 const analysisContext = document.getElementById("analysisContext");
 
-const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+const ANALYZE_API = "/api/analyze";
 const MODEL = "llama-3.3-70b-versatile";
-const DEFAULT_API_KEY = window.APP_CONFIG?.GROQ_API_KEY || "";
 const THEME_KEY = "legal-analyzer-theme";
 const PROFESSION_PROMPTS = {
   freelancers: "Focus on scope creep, revision limits, IP transfer, portfolio rights, usage rights, and payment milestones.",
@@ -98,10 +96,6 @@ themeToggle.addEventListener("click", toggleTheme);
 
 applySavedTheme();
 
-if (DEFAULT_API_KEY) {
-  apiKeyInput.value = DEFAULT_API_KEY;
-}
-
 function setStatus(message, type = "") {
   statusEl.textContent = message;
   statusEl.className = `status ${type}`.trim();
@@ -127,14 +121,9 @@ async function handleFileUpload(event) {
 }
 
 async function analyzeDocument() {
-  const apiKey = apiKeyInput.value.trim();
   const content = contractText.value.trim();
   const profile = getSelectedProfile();
 
-  if (!apiKey) {
-    setStatus("Please enter your Groq API key.", "error");
-    return;
-  }
   if (!content) {
     setStatus("Please paste contract text or upload a .txt file.", "error");
     return;
@@ -181,21 +170,21 @@ ${content}`,
       ],
     };
 
-    const response = await fetch(GROQ_URL, {
+    const response = await fetch(ANALYZE_API, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
 
+    const data = await response.json().catch(() => ({}));
     if (!response.ok) {
-      const errorBody = await response.text();
-      throw new Error(`API ${response.status}: ${errorBody}`);
+      const detail =
+        typeof data.error === "string"
+          ? data.error
+          : data.error?.message || JSON.stringify(data);
+      throw new Error(`API ${response.status}: ${detail}`);
     }
 
-    const data = await response.json();
     const message = data?.choices?.[0]?.message?.content;
     if (!message) {
       throw new Error("Empty response from Groq API.");
